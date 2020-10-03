@@ -14,11 +14,10 @@ public class TicTacToe {
 	}
 
 	// Player to choose the letter
-	private static char choosePlayerLetter() {
+	private char choosePlayerLetter() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Choose your letter: ");
-		char playerLetter = ' ';
-		playerLetter = input.next().toUpperCase().charAt(0);
+		char playerLetter = input.next().toUpperCase().charAt(0);
 		input.close();
 		return playerLetter;
 	}
@@ -30,14 +29,15 @@ public class TicTacToe {
 
 		TicTacToe cb = new TicTacToe();
 		cb.createBoard();
-		char playerLetter = cb.choosePlayerLetter();
+		char userLetter=cb.choosePlayerLetter();
 		char computerLetter;
-		if (choosePlayerLetter() == 'X') {
+		if (userLetter == 'X') {
 			computerLetter = 'O';
 		} else {
 			computerLetter = 'X';
 		}
 		System.out.println("Computer letter is : " + computerLetter);
+		
 	}
 
 }
