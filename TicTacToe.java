@@ -5,6 +5,10 @@ import java.util.Scanner;
 
 public class TicTacToe {
 
+	// Constants
+	private final static int TAIL = 0;
+	private final static int HEAD = 1;
+
 	// Variables
 	private static char computer;
 	private static char[] board;
@@ -79,6 +83,24 @@ public class TicTacToe {
 		showBoard(board);
 	}
 
+	// Toss of Head & Tail. Head - User, Tail - Computer
+	private static int tossToWhoPlayFirst() {
+		int gameToss = (int) (Math.floor(Math.random() * 10) % 2);
+		return gameToss;
+	}
+
+	// Choose The First Player
+	private static void chooseFirstPlayer(int gameToss,char[] board,char userChoice,char computer) {
+		if (gameToss == HEAD) {
+			System.out.println("User Plays First");
+			makeMove(board, userChoice);
+		}
+		if (gameToss == TAIL) {
+			System.out.println("Computer Plays First");
+			makeMove(board, computer);
+		}
+	}
+
 	public static void main(String[] args) {
 		System.out.println("Welcome to Tic-Tac-Toe Game");
 		board = createBoard();
@@ -89,7 +111,7 @@ public class TicTacToe {
 			computer = 'O';
 		else
 			computer = 'X';
-		showBoard(board);
-		makeMove(board, userChoice);
+		int toss=tossToWhoPlayFirst();
+		chooseFirstPlayer(toss,board,userChoice,computer);
 	}
 }
