@@ -136,7 +136,6 @@ public class TicTacToe {
 		showBoard(board);
 	}
 
-	// Computer plays like me to win
 	public static int computerPlaysWithBrain(char[] board, char choice) {
 		int position = 0;
 		while (position == 0) {
