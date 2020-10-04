@@ -90,14 +90,53 @@ public class TicTacToe {
 	}
 
 	// Choose The First Player
-	private static void chooseFirstPlayer(int gameToss,char[] board,char userChoice,char computer) {
+	private static void chooseFirstPlayer(int gameToss) {
 		if (gameToss == HEAD) {
 			System.out.println("User Plays First");
-			makeMove(board, userChoice);
+			checkWinner(gameToss);
 		}
 		if (gameToss == TAIL) {
 			System.out.println("Computer Plays First");
+			checkWinner(gameToss);
+		}
+	}
+
+	// Check who is Winner or game is Tie
+	private static void checkWinner(int gameToss) {
+
+		if (gameToss == HEAD) {
+			makeMove(board, userChoice);
+		} else if (gameToss == TAIL) {
 			makeMove(board, computer);
+		}
+
+		if ((board[1] == board[2] && board[2] == board[3] && board[1] != ' ')
+				|| (board[4] == board[5] && board[5] == board[6] && board[6] != ' ')
+				|| (board[7] == board[8] && board[8] == board[9] && board[9] != ' ')
+				|| (board[1] == board[4] && board[4] == board[7] && board[7] != ' ')
+				|| (board[2] == board[5] && board[5] == board[8] && board[8] != ' ')
+				|| (board[3] == board[6] && board[6] == board[9] && board[9] != ' ')
+				|| (board[1] == board[5] && board[5] == board[9] && board[9] != ' ')
+				|| (board[3] == board[5] && board[5] == board[7] && board[7] != ' ')) {
+			if (gameToss == HEAD)
+				System.out.println("Winner is User");
+			if (gameToss == TAIL)
+				System.out.println("Winner is Computer");
+			System.exit(0);
+		} else {
+			if (board[1] != ' ' && board[2] != ' ' && board[3] != ' ' && board[4] != ' ' && board[5] != ' '
+					&& board[6] != ' ' && board[7] != ' ' && board[8] != ' ' && board[9] != ' ') {
+				System.out.println("Game is Tie");
+				System.exit(0);
+			} else {
+				if (gameToss == HEAD) {
+					gameToss--;
+					checkWinner(gameToss);
+				} else if (gameToss == TAIL) {
+					gameToss++;
+					checkWinner(gameToss);
+				}
+			}
 		}
 	}
 
@@ -111,7 +150,7 @@ public class TicTacToe {
 			computer = 'O';
 		else
 			computer = 'X';
-		int toss=tossToWhoPlayFirst();
-		chooseFirstPlayer(toss,board,userChoice,computer);
+		int toss = tossToWhoPlayFirst();
+		chooseFirstPlayer(toss);
 	}
 }
