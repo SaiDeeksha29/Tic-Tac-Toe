@@ -4,40 +4,37 @@ import java.util.Scanner;
 
 public class TicTacToe {
 
-	// Create board with Empty Spaces
-	private char[] createBoard() {
+	// Variables
+	private static char computer;
+	private static char[] board;
+	private static char userChoice;
+
+	// Create Board and Assign Empty Spaces
+	private static char[] createBoard() {
 		char[] board = new char[10];
-		for (int i = 1; i < 10; i++) {
+		for (int i = 1; i < board.length; i++)
 			board[i] = ' ';
-		}
 		return board;
 	}
 
-	// Player to choose the letter
-	private char choosePlayerLetter() {
-		Scanner input = new Scanner(System.in);
-		System.out.println("Choose your letter: ");
-		char playerLetter = input.next().toUpperCase().charAt(0);
-		input.close();
-		return playerLetter;
+	// Selection of Letter by User
+	private static char chooseUserLetter() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Choose Your User Letter X or O");
+		char userChoice = sc.next().charAt(0);
+		return userChoice;
 	}
 
 	public static void main(String[] args) {
+		System.out.println("Welcome to Tic-Tac-Toe Game");
+		board = createBoard();
+		userChoice = chooseUserLetter();
 
-		// Welcome message
-		System.out.println("Welcome to TicTacToe program");
-
-		TicTacToe cb = new TicTacToe();
-		cb.createBoard();
-		char userLetter=cb.choosePlayerLetter();
-		char computerLetter;
-		if (userLetter == 'X') {
-			computerLetter = 'O';
-		} else {
-			computerLetter = 'X';
-		}
-		System.out.println("Computer letter is : " + computerLetter);
-		
+		// Assigning Letter to Computer
+		if (userChoice == 'X')
+			computer = 'O';
+		else
+			computer = 'X';
+		System.out.println("Computer letter is " + computer);
 	}
-
 }
