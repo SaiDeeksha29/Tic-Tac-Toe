@@ -67,17 +67,19 @@ public class TicTacToe {
 	}
 
 	// Make Move on Board
-	private static void makeMove(char[] board, char Choice) {
+	private static void makeMove(char[] board, char choice) {
 		boolean empty = false;
-		if (Choice == userChoice) {
-			int position = selectLocation(board);
-			board[position] = Choice;
+		if (choice == userChoice) {
+			int position1 = selectLocation(board);
+			board[position1] = choice;
 		} else {
 			do {
 				int position = (int) (Math.floor((Math.random() * 10) % 9) + 1);
+				computerPlaysWithBrain(position, board, choice);
 				empty = isSpaceFree(board, position);
-				if (empty)
-					board[position] = Choice;
+				if (empty) {
+					board[position] = choice;
+				}
 			} while (empty == false);
 		}
 		showBoard(board);
@@ -138,6 +140,42 @@ public class TicTacToe {
 				}
 			}
 		}
+		showBoard(board);
+	}
+
+	// Computer plays like me to win
+	public static int computerPlaysWithBrain(int position, char[] board, char choice) {
+		if (choice == computer) {
+			if (((board[1] == board[2] && board[1] == computer) || (board[5] == board[7] && board[5] == computer)
+					|| (board[6] == board[9] && board[6] == computer)) && board[3] == ' ') {
+				position = 3;
+			} else if (((board[4] == board[5] && board[4] == computer) || (board[3] == board[9] && board[3] == computer))
+					&& board[6] == ' ') {
+				position = 6;
+			} else if (((board[5] == board[1] && board[1] == computer) || (board[8] == board[7] && board[7] == computer)
+					|| (board[6] == board[3] && board[6] == computer)) && board[9] == ' ') {
+				position = 9;
+			} else if (((board[3] == board[2] && board[3] == computer) || (board[4] == board[7] && board[4] == computer)
+					|| (board[5] == board[9] && board[5] == computer)) && board[1] == ' ') {
+				position = 1;
+			} else if (((board[1] == board[7] && board[1] == computer) || (board[5] == board[6] && board[5] == computer))
+					&& board[4] == ' ') {
+				position = 4;
+			} else if (((board[1] == board[4] && board[1] == computer) || (board[5] == board[3] && board[5] == computer)
+					|| (board[8] == board[9] && board[8] == computer)) && board[7] == ' ') {
+				position = 7;
+			} else if (((board[1] == board[3] && board[1] == computer) || (board[5] == board[8] && board[5] == computer))
+					&& board[2] == ' ') {
+				position = 2;
+			} else if (((board[5] == board[2] && board[5] == computer) || (board[7] == board[9] && board[7] == computer))
+					&& board[8] == ' ') {
+				position = 8;
+			} else if (((board[1] == board[9] && board[1] == computer) || (board[3] == board[7] && board[3] == computer)
+					|| (board[6] == board[4] && board[6] == computer)) && board[5] == ' ') {
+				position = 5;
+			}
+		}
+		return position;
 	}
 
 	public static void main(String[] args) {
