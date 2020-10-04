@@ -1,5 +1,6 @@
 package com.blz.training;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class TicTacToe {
@@ -39,6 +40,28 @@ public class TicTacToe {
 		System.out.println("\n_______");
 	}
 
+	// Selection of location by Player
+	private static int selectLocation(char[] board, char userChoice) {
+		Scanner sc = new Scanner(System.in);
+		boolean available = false;
+		int position = 0;
+		Integer[] validCells = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		do {
+			System.out.println("Choose a Desired Location on Board from 1 to 9 :");
+			position = sc.nextInt();
+			if (isSpaceFree(board, position) && Arrays.asList(validCells).contains(position))
+				available = true;
+			else
+				System.out.println("Invalid Location. Choose from 1 to 9");
+		} while (available == false);
+		return position;
+
+	}
+
+	public static boolean isSpaceFree(char[] board, int position) {
+		return board[position] == ' ';
+	}
+
 	public static void main(String[] args) {
 		System.out.println("Welcome to Tic-Tac-Toe Game");
 		board = createBoard();
@@ -50,5 +73,6 @@ public class TicTacToe {
 		else
 			computer = 'X';
 		showBoard(board);
+		selectLocation(board, userChoice);
 	}
 }
