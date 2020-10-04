@@ -41,7 +41,7 @@ public class TicTacToe {
 	}
 
 	// Selection of location by Player
-	private static int selectLocation(char[] board, char userChoice) {
+	private static int selectLocation(char[] board) {
 		Scanner sc = new Scanner(System.in);
 		boolean available = false;
 		int position = 0;
@@ -62,6 +62,23 @@ public class TicTacToe {
 		return board[position] == ' ';
 	}
 
+	// Make Move on Board
+	private static void makeMove(char[] board, char Choice) {
+		boolean empty = false;
+		if (Choice == userChoice) {
+			int position = selectLocation(board);
+			board[position] = Choice;
+		} else {
+			do {
+				int position = (int) (Math.floor((Math.random() * 10) % 9) + 1);
+				empty = isSpaceFree(board, position);
+				if (empty)
+					board[position] = Choice;
+			} while (empty == false);
+		}
+		showBoard(board);
+	}
+
 	public static void main(String[] args) {
 		System.out.println("Welcome to Tic-Tac-Toe Game");
 		board = createBoard();
@@ -73,6 +90,6 @@ public class TicTacToe {
 		else
 			computer = 'X';
 		showBoard(board);
-		selectLocation(board, userChoice);
+		makeMove(board, userChoice);
 	}
 }
