@@ -226,17 +226,34 @@ public class TicTacToe {
 		return position;
 	}
 
+	// User choice to Start the game
+	public static boolean askIfPlayerWantsToRestart() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Do you want to play 'y or n'");
+		char answer = sc.next().charAt(0);
+		boolean restart = false;
+		if (answer == 'y') {
+			restart = true;
+		} else if (answer == 'n') {
+			restart = false;
+		}
+		return restart;
+	}
+
 	public static void main(String[] args) {
 		System.out.println("Welcome to Tic-Tac-Toe Game");
-		board = createBoard();
-		userChoice = chooseUserLetter();
+		boolean restart = askIfPlayerWantsToRestart();
+		while (restart) {
+			board = createBoard();
+			userChoice = chooseUserLetter();
 
-		// Assigning Letter to Computer
-		if (userChoice == 'X')
-			computer = 'O';
-		else
-			computer = 'X';
-		int toss = tossToWhoPlayFirst();
-		chooseFirstPlayer(toss);
+			// Assigning Letter to Computer
+			if (userChoice == 'X')
+				computer = 'O';
+			else
+				computer = 'X';
+			int toss = tossToWhoPlayFirst();
+			chooseFirstPlayer(toss);
+		}
 	}
 }
